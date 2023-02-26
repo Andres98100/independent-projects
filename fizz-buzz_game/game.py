@@ -65,16 +65,14 @@ class fizzBuzz_game(Rules):
                             print("Please enter a valid answer!")
                         else:
                             timeout = True
-                            self.execution(n, r, end - start)
-
+                            self.execution_time(n, r, end - start)
                 else:
                     print("Game over")
                     return
-
         elif level <= 0 or level > 3:
             print("Not a valid difficulty")
 
-    def execution(self, n, r, time_toker):
+    def execution(self, n, r):
         """Function to execute validation of answers"""
 
         if (n % 3 == 0) and (n % 5 == 0):
@@ -97,6 +95,9 @@ class fizzBuzz_game(Rules):
         print("Your score is: {}".format(self.score))
         print("You have {} lifes".format(self.lifes))
         self.save_users("data_base.json")
+    
+    def execution_time(self, n, r, token_time):
+        self.execution(n, r)
 
     def registrer(self):
         self.name = input("Enter your name: ")
@@ -140,11 +141,13 @@ class fizzBuzz_game(Rules):
                     return
             print(f"{name} is not found in the database")
 
-    
-game = fizzBuzz_game()
-game.play()
-while True:
-    name = input("Enter a name to check their score, or 'exit' to exit: ")
-    if name.lower() == "exit":
-        break
-    game.get_user_score(name)
+def main():
+    game = fizzBuzz_game()
+    game.play()
+    while True:
+        name = input("Enter a name to check their score, or 'exit' to exit: ")
+        if name.lower() == "exit":
+            break
+        game.get_user_score(name)
+if __name__ == "__main__":
+    main()
